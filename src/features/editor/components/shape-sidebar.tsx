@@ -3,7 +3,7 @@ import { FaCircle, FaSquare, FaSquareFull } from "react-icons/fa";
 import { IoTriangle } from "react-icons/io5";
 import { FaDiamond } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
-import { ActiveTool } from "@/features/editor/types";
+import { ActiveTool, Editor } from "@/features/editor/types";
 import { ToolSidebarHeader } from "@/features/editor/components/tool-sidebar-header";
 import { ToolSidebarClose } from "@/features/editor/components/tool-sidebar-close";
 import { ShapeTool } from "@/features/editor/components/shape-tool";
@@ -12,40 +12,45 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 type Props = {
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
+  editor: Editor | undefined;
 };
 
-export const ShapeSidebar: FC<Props> = ({ activeTool, onChangeActiveTool }) => {
+export const ShapeSidebar: FC<Props> = ({
+  activeTool,
+  onChangeActiveTool,
+  editor,
+}) => {
   const items = [
     {
       name: "circle",
       icon: FaCircle,
-      onClick: () => {},
+      onClick: () => editor?.addCircle(),
     },
     {
       name: "square",
       icon: FaSquare,
-      onClick: () => {},
+      onClick: () => editor?.addSoftRectangle(),
     },
     {
       name: "square-full",
       icon: FaSquareFull,
-      onClick: () => {},
+      onClick: () => editor?.addRectangle(),
     },
     {
       name: "triangle",
       icon: IoTriangle,
-      onClick: () => {},
+      onClick: () => editor?.addTriangle(),
     },
     {
       name: "reverse-triangle",
       icon: IoTriangle,
-      onClick: () => {},
+      onClick: () => editor?.addInverseTriangle(),
       iconClassName: "rotate-180",
     },
     {
       name: "diamond",
       icon: FaDiamond,
-      onClick: () => {},
+      onClick: () => editor?.addDiamond(),
     },
   ];
 
