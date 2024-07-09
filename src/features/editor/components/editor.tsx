@@ -25,6 +25,10 @@ export const Editor: FC<Props> = ({}) => {
       initialCanvas: canvas,
       initialContainer: containerRef.current!,
     });
+
+    return () => {
+      canvas.dispose();
+    };
   }, [init]);
 
   return (
