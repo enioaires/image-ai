@@ -7,6 +7,7 @@ import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
 import { Toolbar } from "./toolbar";
 import { Footer } from "./footer";
+import { ShapeSidebar } from "./shape-sidebar";
 
 type Props = {};
 
@@ -50,6 +51,10 @@ export const Editor: FC<Props> = ({}) => {
       <Navbar activeTool={activeTool} onChangeActiveTool={onChangeActiveTool} />
       <div className="absolute h-[calc(100%-68px)] w-full top-[68px] flex">
         <Sidebar
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <ShapeSidebar
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
