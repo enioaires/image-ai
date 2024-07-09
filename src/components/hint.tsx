@@ -25,7 +25,7 @@ export const Hint: FC<HintProps> = ({
 }) => {
   return (
     <TooltipProvider>
-      <Tooltip delayDuration={100}>
+      <Tooltip delayDuration={1000}>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent
           side={side}

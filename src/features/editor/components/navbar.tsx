@@ -19,8 +19,15 @@ import { CiFileOn } from "react-icons/ci";
 import { Separator } from "@/components/ui/separator";
 import { Hint } from "@/components/hint";
 import { BsCloudCheck } from "react-icons/bs";
+import { ActiveTool } from "@/features/editor/types";
+import { cn } from "@/lib/utils";
 
-export const Navbar: FC = ({}) => {
+type Props = {
+  activeTool: ActiveTool;
+  onChangeActiveTool: (tool: ActiveTool) => void;
+};
+
+export const Navbar: FC<Props> = ({ activeTool, onChangeActiveTool }) => {
   const fileMenuItems = [
     {
       name: "Abrir",
@@ -89,7 +96,12 @@ export const Navbar: FC = ({}) => {
         </DropdownMenu>
         <Separator orientation="vertical" className="mx-2" />
         <Hint label="Selecionar">
-          <Button variant="ghost" size="icon" onClick={() => {}} className="">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => onChangeActiveTool("select")}
+            className={cn(activeTool === "select" && "bg-gray-100")}
+          >
             <MousePointerClickIcon className="size-4 mr-1" />
           </Button>
         </Hint>
