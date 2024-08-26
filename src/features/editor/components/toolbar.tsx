@@ -5,6 +5,7 @@ import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import {BsBorderWidth} from "react-icons/bs";
 import {ArrowDown, ArrowUp} from "lucide-react";
+import {RxTransparencyGrid} from "react-icons/rx";
 
 type Props = {
   activeTool: ActiveTool;
@@ -94,6 +95,18 @@ export const Toolbar: FC<Props> = ({
             variant="ghost"
           >
             <ArrowDown className="size-4"/>
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Opacidade" side="bottom" alignOffset={5}>
+          <Button
+            onClick={() => onChangeActiveTool("opacity")}
+            size="icon"
+            variant="ghost"
+            className={cn(activeTool === "opacity" && "bg-gray-100")}
+          >
+            <RxTransparencyGrid className="size-4"/>
           </Button>
         </Hint>
       </div>
