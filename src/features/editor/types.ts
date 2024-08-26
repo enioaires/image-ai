@@ -1,4 +1,4 @@
-import { fabric } from "fabric";
+import {fabric} from "fabric";
 import * as material from "material-colors";
 
 export const selectionDependentTools = [
@@ -134,5 +134,7 @@ export type Editor = {
 
   canvas: fabric.Canvas;
 
+  bringForward: () => void;
+  sendBackwards: () => void;
   selectedObjects: fabric.Object[];
 };

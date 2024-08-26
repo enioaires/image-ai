@@ -4,6 +4,7 @@ import {Hint} from "@/components/hint";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import {BsBorderWidth} from "react-icons/bs";
+import {ArrowDown, ArrowUp} from "lucide-react";
 
 type Props = {
   activeTool: ActiveTool;
@@ -71,6 +72,28 @@ export const Toolbar: FC<Props> = ({
             className={cn(activeTool === "stroke-width" && "bg-gray-100")}
           >
             <BsBorderWidth className="size-4"/>
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Enviar para Frente" side="bottom" alignOffset={5}>
+          <Button
+            onClick={() => editor?.bringForward()}
+            size="icon"
+            variant="ghost"
+          >
+            <ArrowUp className="size-4"/>
+          </Button>
+        </Hint>
+      </div>
+      <div className="flex items-center h-full justify-center">
+        <Hint label="Enviar para Trás" side="bottom" alignOffset={5}>
+          <Button
+            onClick={() => editor?.sendBackwards()}
+            size="icon"
+            variant="ghost"
+          >
+            <ArrowDown className="size-4"/>
           </Button>
         </Hint>
       </div>
