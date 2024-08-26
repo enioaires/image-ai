@@ -13,6 +13,7 @@ import {
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
   STROKE_WIDTH,
+  TEXT_OPTIONS,
   TRIANGLE_OPTIONS,
 } from "@/features/editor/types";
 import {isTextType} from "@/features/editor/utils";
@@ -56,6 +57,16 @@ const buildEditor = ({
 
   return {
     canvas,
+    selectedObjects,
+    addText: (value, options) => {
+      const object = new fabric.Textbox(value, {
+        ...TEXT_OPTIONS,
+        fill: fillColor,
+        ...options,
+      })
+
+      addToCanvas(object);
+    },
     getActiveOpacity: () => {
       const selectedObject = selectedObjects[0];
 
@@ -63,7 +74,7 @@ const buildEditor = ({
 
       return selectedObject.get("opacity") || 1;
     },
-    changeOpacity: (value: number) => {
+    changeOpacity: (value) => {
       canvas.getActiveObjects().forEach((obj) => {
         obj.set({opacity: value});
       });
@@ -87,7 +98,7 @@ const buildEditor = ({
       const workspace = getWorkspace();
       workspace?.sendToBack();
     },
-    changeFillColor: (value: string) => {
+    changeFillColor: (value) => {
       setFillColor(value);
 
       canvas.getActiveObjects().forEach((obj) => {
@@ -97,7 +108,7 @@ const buildEditor = ({
       canvas.renderAll();
     },
 
-    changeStrokeWidth: (value: number) => {
+    changeStrokeWidth: (value) => {
       setStrokeWidth(value);
 
       canvas.getActiveObjects().forEach((obj) => {
@@ -107,7 +118,7 @@ const buildEditor = ({
       canvas.renderAll();
     },
 
-    changeStrokeDashArray: (value: number[]) => {
+    changeStrokeDashArray: (value) => {
       setStrokeDashArray(value);
 
       canvas.getActiveObjects().forEach((obj) => {
@@ -117,7 +128,7 @@ const buildEditor = ({
       canvas.renderAll();
     },
 
-    changeStrokeColor: (value: string) => {
+    changeStrokeColor: (value) => {
       setStrokeColor(value);
 
       canvas.getActiveObjects().forEach((obj) => {
@@ -257,7 +268,6 @@ const buildEditor = ({
 
       return selectedObject.get("strokeDashArray") || strokeDashArray;
     },
-    selectedObjects,
   };
 };
 

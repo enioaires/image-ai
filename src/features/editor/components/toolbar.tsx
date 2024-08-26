@@ -6,6 +6,7 @@ import {cn} from "@/lib/utils";
 import {BsBorderWidth} from "react-icons/bs";
 import {ArrowDown, ArrowUp} from "lucide-react";
 import {RxTransparencyGrid} from "react-icons/rx";
+import {isTextType} from "@/features/editor/utils";
 
 type Props = {
   activeTool: ActiveTool;
@@ -21,6 +22,10 @@ export const Toolbar: FC<Props> = ({
   const fillColor = editor?.getActiveFillColor()
   const strokeColor = editor?.getActiveStrokeColor()
 
+  const selectedObjectType = editor?.selectedObjects[0]?.type;
+
+  const isText = isTextType(selectedObjectType);
+
   if (!editor?.selectedObjects.length)
     return (
       <div
@@ -30,6 +35,7 @@ export const Toolbar: FC<Props> = ({
   return (
     <div
       className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2">
+      {/* Fill Color Button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Cor" side="bottom" alignOffset={5}>
           <Button
@@ -47,6 +53,9 @@ export const Toolbar: FC<Props> = ({
           </Button>
         </Hint>
       </div>
+
+      {/* Stroke Color Button */}
+      {!isText && (
       <div className="flex items-center h-full justify-center">
         <Hint label="Cor da Borda" side="bottom" alignOffset={5}>
           <Button
@@ -64,6 +73,10 @@ export const Toolbar: FC<Props> = ({
           </Button>
         </Hint>
       </div>
+      )}
+
+      {/* Stroke Width Button */}
+      {!isText && (
       <div className="flex items-center h-full justify-center">
         <Hint label="Largura da Borda" side="bottom" alignOffset={5}>
           <Button
@@ -76,6 +89,9 @@ export const Toolbar: FC<Props> = ({
           </Button>
         </Hint>
       </div>
+      )}
+
+      {/* Bring Forward Button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Enviar para Frente" side="bottom" alignOffset={5}>
           <Button
@@ -87,6 +103,8 @@ export const Toolbar: FC<Props> = ({
           </Button>
         </Hint>
       </div>
+
+      {/* Send Backwards Button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Enviar para Trás" side="bottom" alignOffset={5}>
           <Button
@@ -98,6 +116,8 @@ export const Toolbar: FC<Props> = ({
           </Button>
         </Hint>
       </div>
+
+      {/* Opacity Button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Opacidade" side="bottom" alignOffset={5}>
           <Button
