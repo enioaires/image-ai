@@ -1,19 +1,20 @@
-import { fabric } from "fabric";
-import { useCallback, useState, useMemo } from "react";
-import { useAutoResize } from "./use-auto-resize";
-import { useCanvasEvents } from "./use-canvas-events";
+import {fabric} from "fabric";
+import {useCallback, useMemo, useState} from "react";
+import {useAutoResize} from "./use-auto-resize";
+import {useCanvasEvents} from "./use-canvas-events";
 import {
   BuildEditorProps,
   CIRCLE_OPTIONS,
   DIAMOND_OPTIONS,
   Editor,
+  EditorHookProps,
   FILL_COLOR,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_WIDTH,
   TRIANGLE_OPTIONS,
 } from "@/features/editor/types";
-import { isTextType } from "@/features/editor/utils";
+import {isTextType} from "@/features/editor/utils";
 
 type Props = {
   initialCanvas: fabric.Canvas;
@@ -175,14 +176,31 @@ const buildEditor = ({
       addToCanvas(object);
     },
     canvas,
-    fillColor,
+    getActiveFillColor: () => {
+      const selectedObject = selectedObjects[0];
+
+      if(!selectedObject) return fillColor;
+
+      const value = selectedObject.get("fill") || fillColor;
+
+      // Currently, gradients & patterns are not supported
+      return value as string;
+  },
+    getActiveStrokeColor: () => {
+      const selectedObject = selectedObjects[0];
+
+      if(!selectedObject) return strokeColor;
+
+      return selectedObject.get("stroke") || strokeColor;
+    },
     strokeWidth,
-    strokeColor,
     selectedObjects,
   };
 };
 
-export const useEditor = () => {
+export const useEditor = ({
+                              clearSelectionCallback,
+                          }: EditorHookProps) => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [selectedObjects, setSelectedObjects] = useState<fabric.Object[]>([]);
@@ -199,6 +217,7 @@ export const useEditor = () => {
   useCanvasEvents({
     canvas,
     setSelectedObjects,
+    clearSelectionCallback,
   });
 
   const editor = useMemo(() => {

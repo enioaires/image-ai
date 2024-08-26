@@ -4,9 +4,10 @@ import { useEffect } from "react";
 type Props = {
   canvas: fabric.Canvas | null;
   setSelectedObjects: (objects: fabric.Object[]) => void;
+  clearSelectionCallback?: () => void;
 };
 
-export const useCanvasEvents = ({ canvas, setSelectedObjects }: Props) => {
+export const useCanvasEvents = ({ canvas, setSelectedObjects, clearSelectionCallback }: Props) => {
   useEffect(() => {
     if (canvas) {
       canvas.on("selection:created", (e) => {
@@ -21,6 +22,7 @@ export const useCanvasEvents = ({ canvas, setSelectedObjects }: Props) => {
 
       canvas.on("selection:cleared", () => {
         setSelectedObjects([]);
+        clearSelectionCallback?.();
       });
     }
 
@@ -29,5 +31,5 @@ export const useCanvasEvents = ({ canvas, setSelectedObjects }: Props) => {
       canvas?.off("selection:updated");
       canvas?.off("selection:cleared");
     };
-  }, [canvas, setSelectedObjects]);
+  }, [canvas, setSelectedObjects, clearSelectionCallback]);
 };
