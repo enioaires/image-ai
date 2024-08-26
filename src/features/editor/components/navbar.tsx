@@ -1,26 +1,14 @@
-"use client";
-import { FC } from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Logo } from "./logo";
-import {
-  ChevronDownIcon,
-  DownloadIcon,
-  MousePointerClickIcon,
-  Redo2Icon,
-  Undo2Icon,
-} from "lucide-react";
-import { CiFileOn } from "react-icons/ci";
-import { Separator } from "@/components/ui/separator";
-import { Hint } from "@/components/hint";
-import { BsCloudCheck } from "react-icons/bs";
-import { ActiveTool } from "@/features/editor/types";
-import { cn } from "@/lib/utils";
+import {FC} from "react";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
+import {Button} from "@/components/ui/button";
+import {Logo} from "./logo";
+import {ChevronDownIcon, DownloadIcon, MousePointerClickIcon, Redo2Icon, Undo2Icon,} from "lucide-react";
+import {CiFileOn} from "react-icons/ci";
+import {Separator} from "@/components/ui/separator";
+import {Hint} from "@/components/hint";
+import {BsCloudCheck} from "react-icons/bs";
+import {ActiveTool} from "@/features/editor/types";
+import {cn} from "@/lib/utils";
 
 type Props = {
   activeTool: ActiveTool;

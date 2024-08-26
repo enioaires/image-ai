@@ -2,6 +2,24 @@ import {fabric} from "fabric";
 import * as material from "material-colors";
 import {ITextboxOptions} from "fabric/fabric-impl";
 
+export const fonts = [
+  "Arial",
+  "Arial Black",
+  "Verdana",
+  "Helvetica",
+  "Tahoma",
+  "Trebuchet MS",
+  "Times New Roman",
+  "Georgia",
+  "Garamond",
+  "Courier New",
+  "Brush Script MT",
+  "Palatino",
+  "Bookman",
+  "Comic Sans MS",
+  "Impact",
+]
+
 export const selectionDependentTools = [
   "fill",
   "font",
@@ -124,6 +142,11 @@ export type BuildEditorProps = {
   setStrokeColor: (value: string) => void;
   setStrokeWidth: (value: number) => void;
 
+  fontFamily: string;
+  setFontFamily: (value: string) => void;
+  fontSize: number;
+  setFontSize: (value: number) => void;
+
   selectedObjects: fabric.Object[];
 };
 
@@ -141,6 +164,10 @@ export type Editor = {
 
   // Text addition methods
   addText: (value: string, options?: ITextboxOptions) => void;
+
+  // Text properties
+  changeFontFamily: (value: string) => void;
+  getActiveFontFamily: () => string;
 
   // Object manipulation methods
   bringForward: () => void;

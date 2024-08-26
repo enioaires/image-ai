@@ -9,6 +9,8 @@ import {
   Editor,
   EditorHookProps,
   FILL_COLOR,
+  FONT_FAMILY,
+  FONT_SIZE,
   RECTANGLE_OPTIONS,
   STROKE_COLOR,
   STROKE_DASH_ARRAY,
@@ -34,6 +36,8 @@ const buildEditor = ({
                        setStrokeColor,
                        setStrokeWidth,
                        selectedObjects,
+                       fontFamily,
+                       setFontFamily
                      }: BuildEditorProps): Editor => {
   const getWorkspace = () => {
     return canvas.getObjects().find((obj) => obj.name === "clip");
@@ -66,6 +70,26 @@ const buildEditor = ({
       })
 
       addToCanvas(object);
+    },
+    changeFontFamily: (value) => {
+      setFontFamily(value);
+
+      canvas.getActiveObjects().forEach((obj) => {
+        if (isTextType(obj.type)) {
+          obj._set("fontFamily", value);
+        }
+      });
+
+      canvas.renderAll();
+    },
+    getActiveFontFamily: () => {
+      const selectedObject = selectedObjects[0];
+
+      if (!selectedObject) return fontFamily;
+
+      // @ts-ignore
+      // Faulty typings
+      return selectedObject.get("fontFamily") || fontFamily;
     },
     getActiveOpacity: () => {
       const selectedObject = selectedObjects[0];
@@ -283,6 +307,9 @@ export const useEditor = ({
   const [strokeWidth, setStrokeWidth] = useState<number>(STROKE_WIDTH);
   const [strokeDashArray, setStrokeDashArray] = useState<number[]>(STROKE_DASH_ARRAY);
 
+  const [fontFamily, setFontFamily] = useState<string>(FONT_FAMILY);
+  const [fontSize, setFontSize] = useState<number>(FONT_SIZE);
+
   useAutoResize({
     canvas,
     container,
@@ -307,6 +334,10 @@ export const useEditor = ({
         setStrokeColor,
         setStrokeWidth,
         selectedObjects,
+        fontFamily,
+        setFontFamily,
+        fontSize,
+        setFontSize,
       });
     }
 
@@ -317,11 +348,9 @@ export const useEditor = ({
     strokeColor,
     strokeWidth,
     strokeDashArray,
-    setStrokeDashArray,
-    setFillColor,
-    setStrokeColor,
-    setStrokeWidth,
     selectedObjects,
+    fontFamily,
+    fontSize,
   ]);
 
   const init = useCallback(({initialCanvas, initialContainer}: Props) => {

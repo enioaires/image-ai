@@ -1,17 +1,7 @@
-"use client";
-import { FC } from "react";
-import { SidebarItem } from "./sidebar-item";
-import {
-  LayoutTemplateIcon,
-  ImageIcon,
-  PencilIcon,
-  PresentationIcon,
-  SettingsIcon,
-  ShapesIcon,
-  SparklesIcon,
-  TypeIcon,
-} from "lucide-react";
-import { ActiveTool } from "@/features/editor/types";
+import {FC} from "react";
+import {SidebarItem} from "./sidebar-item";
+import {ImageIcon, LayoutTemplateIcon, SettingsIcon, ShapesIcon, SparklesIcon, TypeIcon,} from "lucide-react";
+import {ActiveTool} from "@/features/editor/types";
 
 type Props = {
   activeTool: ActiveTool;

@@ -4,7 +4,7 @@ import {Hint} from "@/components/hint";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import {BsBorderWidth} from "react-icons/bs";
-import {ArrowDown, ArrowUp} from "lucide-react";
+import {ArrowDown, ArrowUp, ChevronDownIcon} from "lucide-react";
 import {RxTransparencyGrid} from "react-icons/rx";
 import {isTextType} from "@/features/editor/utils";
 
@@ -21,6 +21,7 @@ export const Toolbar: FC<Props> = ({
                                    }) => {
   const fillColor = editor?.getActiveFillColor()
   const strokeColor = editor?.getActiveStrokeColor()
+  const fontFamily = editor?.getActiveFontFamily()
 
   const selectedObjectType = editor?.selectedObjects[0]?.type;
 
@@ -91,6 +92,23 @@ export const Toolbar: FC<Props> = ({
       </div>
       )}
 
+      {/* Font Family Button */}
+      {isText && (
+        <div className="flex items-center h-full justify-center">
+          <Hint label="Fonte" side="bottom" alignOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("font")}
+              size="sm"
+              variant="ghost"
+              className={cn(activeTool === "font" && "bg-gray-100")}
+
+            >
+              <div className="text-sm max-w-[100px] truncate">{fontFamily}</div>
+              <ChevronDownIcon className="size-4 ml-2 shrink-0"/>
+            </Button>
+          </Hint>
+        </div>
+      )}
       {/* Bring Forward Button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Enviar para Frente" side="bottom" alignOffset={5}>
