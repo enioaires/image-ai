@@ -40,7 +40,7 @@ export const TextSidebar: FC<Props> = ({
             size="lg"
             onClick={() => editor?.addText("Título", {
               fontSize: 80,
-              fontWeight: 700,
+              fontWeight: 800,
             })}
           >
             <span className="text-3xl font-bold">Adicionar Título</span>
@@ -51,7 +51,7 @@ export const TextSidebar: FC<Props> = ({
             size="lg"
             onClick={() => editor?.addText("Subtítulo", {
               fontSize: 44,
-              fontWeight: 600,
+              fontWeight: 700,
             })}
           >
             <span className="text-2xl font-semibold">Adicionar Subtítulo</span>
@@ -62,6 +62,7 @@ export const TextSidebar: FC<Props> = ({
             size="lg"
             onClick={() => editor?.addText("Parágrafo", {
               fontSize: 32,
+              fontWeight: 400,
             })}
           >
             Adicionar Parágrafo

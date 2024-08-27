@@ -75,6 +75,9 @@ export const STROKE_WIDTH = 2;
 export const STROKE_DASH_ARRAY = [];
 export const FONT_FAMILY = "Arial";
 export const FONT_SIZE = 32;
+export const FONT_WEIGHT = 400;
+export const FONT_STYLE = "normal";
+
 
 export const CIRCLE_OPTIONS = {
   stroke: STROKE_COLOR,
@@ -166,8 +169,18 @@ export type Editor = {
   addText: (value: string, options?: ITextboxOptions) => void;
 
   // Text properties
+  changeFontStyle: (value: string) => void;
   changeFontFamily: (value: string) => void;
+  changeFontWeight: (value: number) => void;
+  changeFontLinethrough: (value: boolean) => void;
+  changeFontUnderline: (value: boolean) => void;
+  changeTextAlign: (value: ITextboxOptions["textAlign"]) => void;
+  getActiveFontStyle: () => string;
   getActiveFontFamily: () => string;
+  getActiveFontWeight: () => number;
+  getActiveFontLinethrough: () => boolean;
+  getActiveFontUnderline: () => boolean;
+  getActiveTextAlign: () => ITextboxOptions["textAlign"];
 
   // Object manipulation methods
   bringForward: () => void;
